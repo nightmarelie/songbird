@@ -1,4 +1,4 @@
-# Survival Skills 
+# Chapter 1: Survival Skills 
 
 Many people will tend to say that learning modern day frameworks is easy. The fact is often exactly the opposite and more so if you are not exposed to new web development methodologies.
 
