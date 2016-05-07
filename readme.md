@@ -1,101 +1,123 @@
-# Chapter 2: What is SongBird
+# Chapter 3: Creating the Dev Environment
 
-In a nutshell, SongBird is a bare bone CMS (Content Management System) consisting the following features:
+So that we speak the same language throughout the book, we need a dev (development) environment that it is consistent in everyone's host. That best way to do that is to create a virtual machine (VM) via [vagrant](https://www.vagrantup.com). This is a popular technique nowadays. Laravel has something similar called [Homestead](https://github.com/laravel/homestead)
 
-* Admin Panel and Dashboard - A password protected administration area for administrators and users.
-* User Management System - For administrators to manage users of the system.
-* Multi-lingual Capability - No CMS is complete without this.
-* Page Management System - For managing the front-end menu, slug and content of the site.
-* Media Management System - For administrators to manage files and images.
-* User Logging Sytem - For logging user activities in the backend.
-* Frontend - The portal where the public interacts with the site. No login required.
+We will do **actual coding in your host** (main operating system) and let the VM run the web server, sharing the web folder between the 2 machines. Note that 99% of the time, you don't need to touch the VM except to make sure that it is up and running.
 
-We will attempt to built the CMS using some popular modules available to cut down the development time. This is the best practice. However, that also means that we lose the fun of building some cool bundles ourselves. In view of that, we will attempt to build the Page management bundle and frontend ourselves.
+Our VM will be running ubuntu 14.04, Apache2 and PHP 5.6.
 
-## So What is the Plan?
+## Objectives
 
-In this chapter we are going to define the scope of the software. People spend weeks to write a proper functional specification for a software like this. Functional Specification defines the scope of the project, provides an estimate of the amount of man hours required and duration to complete the job, gives people an idea of what the software is, what it can or can't do. It is also important to use that as a reference when writing test cases as well. 
+> * Install the standard SongBird virtual machine.
 
-Writing good functional spec is the most important part of the Software Development Life Cycle. In our case, we shall cut down the words and show only relevant information in developing SongBird.
+> * Configure your host to access the VM.
 
-## Use Case Diagram
 
-This is a high level overview of the roles and features of SongBird. 
+## Installation
 
-![use case diagram](images/software_ucd.png)
+* In your host machine, make sure you have [php 5.6](http://php.net/manual/en/install.php) and timezone configured, [vagrant](https://www.vagrantup.com/downloads.html), [virtualbox](https://www.virtualbox.org/wiki/Downloads) and [git](https://git-scm.com) **installed**. 
 
-## Database Diagram
+* Mac users can install php 5.6 using
 
-The entity relationships in a nutshell. In the real world, the relationships won't be that simple. You should see more one-to-many and many-to-many relationships.
+```
+-> curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+-> echo "export PATH=/usr/local/php5/bin:$PATH" >> ~/.profile
+-> sudo vi /usr/local/php5/php.d/99-liip-developer.ini
+# add the date.timezone settings to your preferred timezone. eg
+# date.timezone = Australia/Melbourne
+# then shutdown the terminal and restart again
+```
 
-![database diagram](images/database_diagram.png)
+* If you are on Windows OS install [NFS support plugin](https://github.com/GM-Alex/vagrant-winnfsd)
 
-## User Journey
+* Login in [github](http://github.com) and [fork](https://help.github.com/articles/fork-a-repo/) [SongBird repo](https://github.com/bernardpeh/songbird)
 
-This is how I visualise a user would interact with the website. Hopefully, it gives you confidence of what we are about to build.
+```
+# Now you want to clone your new forked repo under your home dir.
+-> cd ~
+-> git clone git@github.com:your_username/songbird.git
+```
 
-a) The frontend homepage:
+* run vagrant
 
-![homepage](images/homepage.png)
+```
+# now we are going to bring up the virtual machine. This should take up to 15 to 30 mins depending on your internet connnection. Have a cup of coffee.
+-> cd songbird
+-> vagrant up
 
-b) The frontend subpage:
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'puphpet/ubuntu1404-x64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'puphpet/ubuntu1404-x64' is up to date...
+==> default: A newer version of the box 'puphpet/ubuntu1404-x64' is available! You currently
+==> default: have version '2.0'. The latest is version '20151201'. Run
+==> default: `vagrant box update` to update.
+==> default: Setting the name of the VM: songbird_default_1462590898969_15135
+==> default: Pruning invalid NFS exports. Administrator privileges will be required...
+...
+```
 
-![pages](images/pages.png)
+* If there were some modules that were not installed, reprovision it
 
-c) The login page:
+```
+vagrant reload --provision
+```
 
-![login page](images/login.png)
 
-d) Backend dashboard:
+* Once everything is successful, we can now update the config for the app:
 
-![admin dashboard](images/admin_dashboard.png)
+```
+-> cd www/songbird
+-> composer udpate
 
-d) Backend listing page:
+# when prompted, leave default settings except for the followings:
+# database_host: 192.168.56.111
+# database_name: songbird
+# database_user: songbird
+# database_password: songbird
+...
+# mailer_host: 127.0.0.1:1025
+...
+```
 
-![admin list user](images/admin_list_user.png)
+We are using smtp port 1025 to catch all mails.
 
-e) Backend record edit page:
+* add IP of your VM on your [host file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
 
-![admin_edit_user](images/admin_edit_user.png)
+```
+192.168.56.111 songbird.dev  www.songbird.dev
+```
 
-We haven't started coding but you already have a realistic view of the final product.
+* Open up browser and go to http://songbird.dev/app/example. If you see the word "homepage", your installation is successful.
 
-## Sitemap
+* Now try this url http://songbird.dev/app_dev.php/app/example and you should see the same "homepage" text but with a little icon/toolbar at the bottom of the page. That's right, you are now in dev mode.
 
-We are going to start with a few pages only, keeping the navigation simple.
+Why the "app_dev.php"? That is like the default index page for the dev environment. All url rewrite goes to this page and this is something unique to Symfony.  
 
-![sitemap](images/sitemap.png)
+A bit of command line teaser...
 
-## User Stories
+```
+-> vagrant ssh -c "wget http://songbird.dev/config.php; cat config.php; rm config.php"
+```
 
-A user story defines the functionality that the user wants to have in plain english. We don't want to drill down to specifics at this stage. The specifics should be in the user scenarios. We make use of "As a", "I want/don't want to" and "So that" to help define good user stories.
-
-As an example:
-
-"As a developer, I want to create a simple CMS, so that I can use it as a vanilla CMS for more complex projects".
-
-We will define the user stories for each chapter as we go along.
-
-## User Scenarios
-
-User Scenarios break the user story down into further possible outcomes. I like to think of them as pseudocode. We make use of "Given", "When" and "Then" to define user scenarios. BDD tests are written based on these scenarios. Based on the example above, Possible scenarios are:
-
-"Given the homepage, When I land on the homepage, Then I should see a big welcome text."
-
-"Given the about us page, When I navigate to the about us page from the menu, Then I should see my name"
-
-We will define the user scenarios based on the user stories for each chapter as we go along.
+We shelled into the VM and look at the raw html of http://songbird.dev/config.php. If you see "Your configuration looks good to run Symfony.", you can be sure that the VM is setup correctly.
 
 ## Summary
 
-In this chapter, we tried to define what SongBird is and isn't. We defined the requirements and provided some use cases/diagrams to help define the end product. In real life, requirement docs could be a lot longer. Having well defined requirements is paramount in building robust software.
+In this chapter, we setup the development environment from a ready made instance of virtualbox. We installed Symfony and configured the host file to access SongBird from the host machine.
 
-Next Chapter: [Chapter 3: Creating the Dev Environment](https://github.com/bernardpeh/songbird/tree/chapter_3)
+Next Chapter: [iChapter 4: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_4)
 
-Previous Chapter: [Chapter 1: Survival Skills](https://github.com/bernardpeh/songbird/tree/chapter_1)
+Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_2)
+
+## Exercises (Optional)
+
+* Try running Symfony's build-in webserver. What command would you use?
+
+* Try using [docker](https://www.docker.com/) rather than [vagrant](https://www.vagrantup.com) for development. What are the pros and cons of each method?
 
 ## References
 
-* [User Story](https://en.wikipedia.org/wiki/User_story)
+* [Symfony Installation](https://symfony.com/doc/current/book/installation.html)
 
-* [Functional Specification](https://en.wikipedia.org/wiki/Functional_specification)
+
