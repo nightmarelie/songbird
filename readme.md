@@ -1,148 +1,101 @@
-# Survival Skills 
+# Chapter 2: What is SongBird
 
-Many people will tend to say that learning modern day frameworks is easy. The fact is often exactly the opposite and more so if you are not exposed to new web development methodologies.
+In a nutshell, SongBird is a bare bone CMS (Content Management System) consisting the following features:
 
-The 2 biggest Symfony resources on the web at the moment are [The Book](http://symfony.com/doc/current/book/index.html) and [The Cookbook](http://symfony.com/doc/2.7/cookbook/index.html), both on Symfony website. Cudos to Fabien and the team behind the books, making Symfony one of the best documented frameworks out there. Having said that, the content in these 2 books are hard to digest and almost impossible to follow unless you have good foundation in Object Oriented Programming. There are a lot to go through. Even if you are have the skills, you will need enough determination to read them. Even if you finish reading them, you still need to have enough practical experience to digest the theory.
+* Admin Panel and Dashboard - A password protected administration area for administrators and users.
+* User Management System - For administrators to manage users of the system.
+* Multi-lingual Capability - No CMS is complete without this.
+* Page Management System - For managing the front-end menu, slug and content of the site.
+* Media Management System - For administrators to manage files and images.
+* User Logging Sytem - For logging user activities in the backend.
+* Frontend - The portal where the public interacts with the site. No login required.
 
-I hope there is really a simple formula to become a Symfony ninja overnight...
+We will attempt to built the CMS using some popular modules available to cut down the development time. This is the best practice. However, that also means that we lose the fun of building some cool bundles ourselves. In view of that, we will attempt to build the Page management bundle and frontend ourselves.
 
-## The Tools You Need
+## So What is the Plan?
 
-You will need to equip yourself before diving in. Ideally, you have
+In this chapter we are going to define the scope of the software. People spend weeks to write a proper functional specification for a software like this. Functional Specification defines the scope of the project, provides an estimate of the amount of man hours required and duration to complete the job, gives people an idea of what the software is, what it can or can't do. It is also important to use that as a reference when writing test cases as well. 
 
-* A good computer. I recommend a modern day *Mac* not more than 4 years old with at least 100G of free space to setup development environment. Mac is fast becoming the new standard for coding. Linux is fine. If you insist in windows, make sure you have command line - [cygwin](https://www.cygwin.com/) is a good option. 
-* Good foundation in Computer Science. Experience with PHP and MYSQL is recommended. A good understanding of Object Oriented Programming and relational databases is required.
-* Understand Dependency Injection (DI). Fabien wrote a good article about [DI](http://fabien.potencier.org/what-is-dependency-injection.html). DI is the heartbeat of Symfony and most modern day framework.
-* Good source control knowledge, especially Git and Git Flow.
-* Basic HTML, CSS and Javascript knowledge.
-* Basic Stylesheet Pre-processor language like LESS or SASS.
-* Basic Linux command line knowledge.
-* A good IDE. There are lots of them out there. I recommend [sublime text](www.sublimetext.com) or [PHP Storm](https://www.jetbrains.com/phpstorm/).
+Writing good functional spec is the most important part of the Software Development Life Cycle. In our case, we shall cut down the words and show only relevant information in developing SongBird.
 
-I hope the list doesn't scare you to get started.
+## Use Case Diagram
 
-## Using the Command Line
+This is a high level overview of the roles and features of SongBird. 
 
-I suggest you to get comfortable with the command line. Many modern day frameworks uses command line to automate tasks. In this book, I'll be using a lot of command line but I suggest you not to memorise them. Always type "app/console" to see the options and then narrow in from there.
+![use case diagram](images/software_ucd.png)
 
-For example, your app/console might look like this (doesn't matter if it doesn't at this point):
+## Database Diagram
 
-```
--> app/console
+The entity relationships in a nutshell. In the real world, the relationships won't be that simple. You should see more one-to-many and many-to-many relationships.
 
-...
+![database diagram](images/database_diagram.png)
 
-Available commands:
-  help                                 Displays help for a command
-  list                                 Lists commands
- assetic
-  assetic:dump                         Dumps all assets to the filesystem
-  assetic:watch                        Dumps assets to the filesystem as their source files are modified
- assets
-  assets:install                       Installs bundles web assets under a public web directory
- cache
-  cache:clear                          Clears the cache
-  cache:warmup                         Warms up an empty cache
- config
-  config:debug                         Dumps the current configuration for an extension
-  config:dump-reference                Dumps the default configuration for an extension
- container
-  container:debug                      Displays current services for an application
- debug
-  debug:config                         Dumps the current configuration for an extension
-  debug:container                      Displays current services for an application
-  debug:event-dispatcher               Displays configured listeners for an application
-  debug:router                         Displays current routes for an application
-  debug:swiftmailer                    Displays current mailers for an application
-  debug:translation                    Displays translation messages information
-  debug:twig                           Shows a list of twig functions, filters, globals and tests
- doctrine
-  doctrine:cache:clear-metadata        Clears all metadata cache for an entity manager
-  doctrine:cache:clear-query           Clears all query cache for an entity manager
-  doctrine:cache:clear-result          Clears result cache for an entity manager
-  doctrine:database:create             Creates the configured database
-  doctrine:database:drop               Drops the configured database
-  doctrine:ensure-production-settings  Verify that Doctrine is properly configured for a production environment.
-  doctrine:generate:crud               Generates a CRUD based on a Doctrine entity
-  doctrine:generate:entities           Generates entity classes and method stubs from your mapping information
-  doctrine:generate:entity             Generates a new Doctrine entity inside a bundle
-  doctrine:generate:form               Generates a form type class based on a Doctrine entity
-  doctrine:mapping:convert             Convert mapping information between supported formats.
-  doctrine:mapping:import              Imports mapping information from an existing database
-  doctrine:mapping:info                
-  doctrine:query:dql                   Executes arbitrary DQL directly from the command line.
-  doctrine:query:sql                   Executes arbitrary SQL directly from the command line.
-  doctrine:schema:create               Executes (or dumps) the SQL needed to generate the database schema
-  doctrine:schema:drop                 Executes (or dumps) the SQL needed to drop the current database schema
-  doctrine:schema:update               Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata.
-  doctrine:schema:validate             Validate the mapping files.
- fos
-  fos:user:activate                    Activate a user
-  fos:user:change-password             Change the password of a user.
-  fos:user:create                      Create a user.
-  fos:user:deactivate                  Deactivate a user
-  fos:user:demote                      Demote a user by removing a role
-  fos:user:promote                     Promotes a user by adding a role
- generate
-  generate:bundle                      Generates a bundle
-  generate:controller                  Generates a controller
-  generate:doctrine:crud               Generates a CRUD based on a Doctrine entity
-  generate:doctrine:entities           Generates entity classes and method stubs from your mapping information
-  generate:doctrine:entity             Generates a new Doctrine entity inside a bundle
-  generate:doctrine:form               Generates a form type class based on a Doctrine entity
- init
-  init:acl                             Mounts ACL tables in the database
- lint
-  lint:twig                            Lints a template and outputs encountered errors
-  lint:yaml                            Lints a file and outputs encountered errors
- orm
-  orm:convert:mapping                  Convert mapping information between supported formats.
- router
-  router:debug                         Displays current routes for an application
-  router:dump-apache                   [DEPRECATED] Dumps all routes as Apache rewrite rules
-  router:match                         Helps debug routes by simulating a path info match
- security
-  security:check                       Checks security issues in your project dependencies
-  security:encode-password             Encodes a password.
- server
-  server:run                           Runs PHP built-in web server
-  server:start                         Starts PHP built-in web server in the background
-  server:status                        Outputs the status of the built-in web server for the given address
-  server:stop                          Stops PHP's built-in web server that was started with the server:start command
- swiftmailer
-  swiftmailer:debug                    Displays current mailers for an application
-  swiftmailer:email:send               Send simple email message
-  swiftmailer:spool:send               Sends emails from the spool
- translation
-  translation:debug                    Displays translation messages information
-  translation:update                   Updates the translation file
- twig
-  twig:debug                           Shows a list of twig functions, filters, globals and tests
-  twig:lint                            Lints a template and outputs encountered errors
- yaml
-  yaml:lint                            Lints a file and outputs encountered errors    
-```
+## User Journey
 
-Wow, that is a lot but don't worry, you will get used to the important ones after finishing this book.
+This is how I visualise a user would interact with the website. Hopefully, it gives you confidence of what we are about to build.
 
-## Selling Your Soul to the Demon
+a) The frontend homepage:
 
-Many people use a [web framework](http://symfony.com/why-use-a-framework) to create internet applications nowadays. A framework speeds up web development by giving you automation tools to create commonly used features like user management system, form creation, admin dashboard, menus...etc. This means that you can create these features easily without knowing how they work. This is like buying a car without knowing how the car works. This is all good until if you want to customise the inner components or repair it. You could get someone to customise the car (hire a developer) or DIY.
+![homepage](images/homepage.png)
 
-If you are a developer, there is value in learning how to built a CMS with Symfony. While building the CMS, you learn how to configure and customise all the bundles to make them work together. As the builder, you will know where to start troubleshooting when things go wrong.
+b) The frontend subpage:
 
-Let's get the ball rolling...
+![pages](images/pages.png)
+
+c) The login page:
+
+![login page](images/login.png)
+
+d) Backend dashboard:
+
+![admin dashboard](images/admin_dashboard.png)
+
+d) Backend listing page:
+
+![admin list user](images/admin_list_user.png)
+
+e) Backend record edit page:
+
+![admin_edit_user](images/admin_edit_user.png)
+
+We haven't started coding but you already have a realistic view of the final product.
+
+## Sitemap
+
+We are going to start with a few pages only, keeping the navigation simple.
+
+![sitemap](images/sitemap.png)
+
+## User Stories
+
+A user story defines the functionality that the user wants to have in plain english. We don't want to drill down to specifics at this stage. The specifics should be in the user scenarios. We make use of "As a", "I want/don't want to" and "So that" to help define good user stories.
+
+As an example:
+
+"As a developer, I want to create a simple CMS, so that I can use it as a vanilla CMS for more complex projects".
+
+We will define the user stories for each chapter as we go along.
+
+## User Scenarios
+
+User Scenarios break the user story down into further possible outcomes. I like to think of them as pseudocode. We make use of "Given", "When" and "Then" to define user scenarios. BDD tests are written based on these scenarios. Based on the example above, Possible scenarios are:
+
+"Given the homepage, When I land on the homepage, Then I should see a big welcome text."
+
+"Given the about us page, When I navigate to the about us page from the menu, Then I should see my name"
+
+We will define the user scenarios based on the user stories for each chapter as we go along.
 
 ## Summary
 
-This is a short chapter. We discussed the basic skills required to learn a modern day framework like Symfony. You were mentally prepared and being warned about the pros and cons of using a framework.
+In this chapter, we tried to define what SongBird is and isn't. We defined the requirements and provided some use cases/diagrams to help define the end product. In real life, requirement docs could be a lot longer. Having well defined requirements is paramount in building robust software.
 
-Next Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_2)
+Next Chapter: [Chapter 3: Creating the Dev Environment](https://github.com/bernardpeh/songbird/tree/chapter_3)
 
-Previous Chapter: [Introduction: SongBird](https://github.com/bernardpeh/songbird)
+Previous Chapter: [Chapter 1: Survival Skills](https://github.com/bernardpeh/songbird/tree/chapter_1)
 
 ## References
 
-* [git](https://git-scm.com/)
+* [User Story](https://en.wikipedia.org/wiki/User_story)
 
-* [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)
+* [Functional Specification](https://en.wikipedia.org/wiki/Functional_specification)
