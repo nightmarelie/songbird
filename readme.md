@@ -1,196 +1,142 @@
-# SongBird 
+# Survival Skills 
 
-![songbird cms](images/chapter_20_screenshot.png)
+Many people will tend to say that learning modern day frameworks is easy. The fact is often exactly the opposite and more so if you are not exposed to new web development methodologies.
 
-***Updated to Symfony 2.8 LTS***
+The 2 biggest Symfony resources on the web at the moment are [The Book](http://symfony.com/doc/current/book/index.html) and [The Cookbook](http://symfony.com/doc/2.7/cookbook/index.html), both on Symfony website. Cudos to Fabien and the team behind the books, making Symfony one of the best documented frameworks out there. Having said that, the content in these 2 books are hard to digest and almost impossible to follow unless you have good foundation in Object Oriented Programming. There are a lot to go through. Even if you are have the skills, you will need enough determination to read them. Even if you finish reading them, you still need to have enough practical experience to digest the theory.
 
-This is an online book and repository documenting the creation of SongBird, a simple CMS created using Symfony.
+I hope there is really a simple formula to become a Symfony ninja overnight...
 
-I created this project to:
+## The Tools You Need
 
-* Illustrate the power of rapid development with Symfony.
+You will need to equip yourself before diving in. Ideally, you have
 
-* Reduce the learning curve by sharing step-by-step guide to create a simple CMS. This process should be helpful to anyone who wants to dive into Symfony.
+* A good computer. I recommend a modern day *Mac* not more than 4 years old with at least 100G of free space to setup development environment. Mac is fast becoming the new standard for coding. Linux is fine. If you insist in windows, make sure you have command line - [cygwin](https://www.cygwin.com/) is a good option. 
+* Good foundation in Computer Science. Experience with PHP and MYSQL is recommended. A good understanding of Object Oriented Programming and relational databases is required.
+* Understand Dependency Injection (DI). Fabien wrote a good article about [DI](http://fabien.potencier.org/what-is-dependency-injection.html). DI is the heartbeat of Symfony and most modern day framework.
+* Good source control knowledge, especially Git and Git Flow.
+* Basic HTML, CSS and Javascript knowledge.
+* Basic Stylesheet Pre-processor language like LESS or SASS.
+* Basic Linux command line knowledge.
+* A good IDE. There are lots of them out there. I recommend [sublime text](www.sublimetext.com) or [PHP Storm](https://www.jetbrains.com/phpstorm/).
 
-* Kickstart more complex Symfony projects with this application.
+I hope the list doesn't scare you to get started.
 
-* Have fun! 
+## Using the Command Line
 
-## Suggestions and Improvements
-
-Feel free to create pull request if you spot any typos or problems with the code. The better this project can help the community, the better it is.
-
-## License
-
-Book License: [CC BY-SA 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/)
-
-Code License: [MIT](https://opensource.org/licenses/MIT)
-
-## Introduction
-
-Choosing the best framework for RAD (Rapid Application Development) has been a topic that has been debated to death. Today, there is no longer such a thing as "The Best Framework" because all modern day frameworks follow the best practice. However, there is such a thing called "The Best Practice". In fact, you could see similar develoment methodologies being used across all frameworks. So knowing one framework well means you can jump between other frameworks easily. Just as human evolves, different frameworks learn from each other and adapt very fast to new and better ways of doing things.
-
-At the time of writing, NodeJS and Rails continue to innovate with PHP closing in fast behind. PHP is the old veteran when comes to web development with the most frameworks in the market. The 2 frameworks that stand out from the pack at the time of writing were Laravel and Symfony. If you are looking to learn a new framework, I highly recommend Symfony because it is one of the more stable modern framework out there. Symfony components have been used by many projects including Drupal and Laravel.
-
-Symfony 2 is a mature framework. A mature framework means that information and libraries don’t get outdated quickly. Adapting too fast to technology is not a good thing because 3rd party libraries couldn’t catch up. Rails early days suffered from this. Nothing worked out of the box and googled information was often outdated. Unless you enjoy spending time troubleshooting system configurations and library dependencies, choose a stable framework that is well supported and documented. You should be spending your precious time learning the software instead.
-
-Learning a new framework has never been an easy task. Many people follow tutorials in google and read up all the documentation in [Symfony website](http://symfony.com) and still find it challenging to create a simple application. Why? Because there is just too much theory and not enough real world practical examples. Worst still, you can get entangled in technical jargons and advance customisations easily. The fact that Symfony is an extremely flexible framework makes it even harder to master because there are so many ways to achieve the same goal. If you are new to MVC (Model-View-Controller) and RAD, you will find that Symfony has a steep learning curve.
-
-This book aims to lower the learning curve by providing a step by step hands-on approach to guide developers who are new to Symfony to build a simple CMS (Let us call it "SongBird") using good industry practice. Hopefully after following all the chapters, your eyes will be opened to RAD and the unlimited possibilities with Symfony. 
-
-## Audience
-
-This book is targeted at developers who are new to Symfony. If you are already an seasoned PHP Developer, I hope you would pick up some hints here and there.
-
-## Why Re-invent the Wheel?
-
-At the time of writing, there are already many CMS and a few popular Symfony ones out there. Symfony has the [cmf project](http://cmf.symfony.com/). Why built a new one? 
-
-We are not building a new CMS and SongBird is not trying to compete in the CMS space. SongBird exists to demonstrate the best practices in web development with Symfony and provide practical tutorials for people who want to try out Rapid Development with a modern day framework.
-
-## Is SongBird Reusable?
-
-Definitely. SongBird is not just a tutorial project, it can be used as a vanilla framework to kickstart projects  because all common features have been build and configured already. Since you built the software yourself, you have full knowledge of how the software work and know where to customise should the need arises. 
-
-You can also think of SongBird as a foundation to learn [cmf project](http://cmf.symfony.com/). Once you are comfortable with the basic concepts of building a CMS, you are ready for more complex projects.
-
-## Conventions Used in This Book
-
-**Each git branch is a chapter**. Obviously, chapter_6 branch means it is Chapter 6. Otherwise stated, all path references assumes **~/songbird/www/songbird/** as the root folder. Always execute commands from the root foler.
-
-To executing commands, You will see a "->" before the command. For example
+I suggest you to get comfortable with the command line. Many modern day frameworks uses command line to automate tasks. In this book, I'll be using a lot of command line but I suggest you not to memorise them. Always type "app/console" to see the options and then narrow in from there.
 
 ```
--> git status
+-> app/console
 
-On branch chapter_6
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   app/AppKernel.php
-	modified:   app/config/routing.yml
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-
-	src/Songbird/
-
-no changes added to commit (use "git add" and/or "git commit -a")
-```
-
-This means that in the command line terminal, go to the ~/songbird/www/songbird/ folder and type in "git status". 
-
-Likewise, a code snippet like this
-
-```
-# app/config/routing.yml
 ...
-Songbird_user:
-    resource: "@SongbirdUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
+
+Available commands:
+  help                                 Displays help for a command
+  list                                 Lists commands
+ assetic
+  assetic:dump                         Dumps all assets to the filesystem
+  assetic:watch                        Dumps assets to the filesystem as their source files are modified
+ assets
+  assets:install                       Installs bundles web assets under a public web directory
+ cache
+  cache:clear                          Clears the cache
+  cache:warmup                         Warms up an empty cache
+ config
+  config:debug                         Dumps the current configuration for an extension
+  config:dump-reference                Dumps the default configuration for an extension
+ container
+  container:debug                      Displays current services for an application
+ debug
+  debug:config                         Dumps the current configuration for an extension
+  debug:container                      Displays current services for an application
+  debug:event-dispatcher               Displays configured listeners for an application
+  debug:router                         Displays current routes for an application
+  debug:swiftmailer                    Displays current mailers for an application
+  debug:translation                    Displays translation messages information
+  debug:twig                           Shows a list of twig functions, filters, globals and tests
+ doctrine
+  doctrine:cache:clear-metadata        Clears all metadata cache for an entity manager
+  doctrine:cache:clear-query           Clears all query cache for an entity manager
+  doctrine:cache:clear-result          Clears result cache for an entity manager
+  doctrine:database:create             Creates the configured database
+  doctrine:database:drop               Drops the configured database
+  doctrine:ensure-production-settings  Verify that Doctrine is properly configured for a production environment.
+  doctrine:generate:crud               Generates a CRUD based on a Doctrine entity
+  doctrine:generate:entities           Generates entity classes and method stubs from your mapping information
+  doctrine:generate:entity             Generates a new Doctrine entity inside a bundle
+  doctrine:generate:form               Generates a form type class based on a Doctrine entity
+  doctrine:mapping:convert             Convert mapping information between supported formats.
+  doctrine:mapping:import              Imports mapping information from an existing database
+  doctrine:mapping:info                
+  doctrine:query:dql                   Executes arbitrary DQL directly from the command line.
+  doctrine:query:sql                   Executes arbitrary SQL directly from the command line.
+  doctrine:schema:create               Executes (or dumps) the SQL needed to generate the database schema
+  doctrine:schema:drop                 Executes (or dumps) the SQL needed to drop the current database schema
+  doctrine:schema:update               Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata.
+  doctrine:schema:validate             Validate the mapping files.
+ fos
+  fos:user:activate                    Activate a user
+  fos:user:change-password             Change the password of a user.
+  fos:user:create                      Create a user.
+  fos:user:deactivate                  Deactivate a user
+  fos:user:demote                      Demote a user by removing a role
+  fos:user:promote                     Promotes a user by adding a role
+ generate
+  generate:bundle                      Generates a bundle
+  generate:controller                  Generates a controller
+  generate:doctrine:crud               Generates a CRUD based on a Doctrine entity
+  generate:doctrine:entities           Generates entity classes and method stubs from your mapping information
+  generate:doctrine:entity             Generates a new Doctrine entity inside a bundle
+  generate:doctrine:form               Generates a form type class based on a Doctrine entity
+ init
+  init:acl                             Mounts ACL tables in the database
+ lint
+  lint:twig                            Lints a template and outputs encountered errors
+  lint:yaml                            Lints a file and outputs encountered errors
+ orm
+  orm:convert:mapping                  Convert mapping information between supported formats.
+ router
+  router:debug                         Displays current routes for an application
+  router:dump-apache                   [DEPRECATED] Dumps all routes as Apache rewrite rules
+  router:match                         Helps debug routes by simulating a path info match
+ security
+  security:check                       Checks security issues in your project dependencies
+  security:encode-password             Encodes a password.
+ server
+  server:run                           Runs PHP built-in web server
+  server:start                         Starts PHP built-in web server in the background
+  server:status                        Outputs the status of the built-in web server for the given address
+  server:stop                          Stops PHP's built-in web server that was started with the server:start command
+ swiftmailer
+  swiftmailer:debug                    Displays current mailers for an application
+  swiftmailer:email:send               Send simple email message
+  swiftmailer:spool:send               Sends emails from the spool
+ translation
+  translation:debug                    Displays translation messages information
+  translation:update                   Updates the translation file
+ twig
+  twig:debug                           Shows a list of twig functions, filters, globals and tests
+  twig:lint                            Lints a template and outputs encountered errors
+ yaml
+  yaml:lint                            Lints a file and outputs encountered errors    
 ```
 
-means update or insert this snippet in ~/songbird/www/songbird/app/config/routing.yml
+Wow, that is a lot but don't worry, you will get used to the important ones after finishing this book.
 
-or it could mean a comment for you to action like so
+## Selling Your Soul to the Demon
 
-```
-# you should commit your changes now.
--> git commit -m"update file changes"
-```
+Many people use a [web framework](http://symfony.com/why-use-a-framework) to create internet applications nowadays. A framework speeds up web development by giving you automation tools to create commonly used features like user management system, form creation, admin dashboard, menus...etc. This means that you can create these features easily without knowing how they work. This is like buying a car without knowing how the car works. This is all good until if you want to customise the inner components or repair it. You could get someone to customise the car (hire a developer) or DIY.
 
-## Learning Symfony
+If you are a developer, there is value in learning how to built a CMS with Symfony. While building the CMS, you learn how to configure and customise all the bundles to make them work together. As the builder, you will know where to start troubleshooting when things go wrong.
 
-If you are new to RAD and like to learn Symfony, I recommend you to go through the chapters in sequential order. Every time you are on a new chapter, create a new branch based on the previous chapter and try to add or update the code as suggested in the chapter. For example, you have just finished chapter 4 and going into chapter 5.
+Let's get the ball rolling...
 
-Firstly, commit all your changes in chapter 4 first
+## Summary
 
-```
--> git commit -m"This is chapter 4 commit comments"
-```
-
-Then checkout chapter 5.
-
-```
--> git checkout -b mychapter_5
-``` 
-
-We use mychapter_x to differentiate between your work and my work. To look at all the branches available:
-
-```
--> git branch -a
-  mychapter_4
-* mychapter_5
-  ...
-  master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/chapter_4
-  remotes/origin/chapter_5
-  ...
-```
-
-If you are being lazy and want to use my chapter 4 instead to start chapter 5,
-
-```
--> git checkout -b mychapter_5 origin/chapter_4
-```
-
-If you are already getting confused, here are some good [git resource](https://help.github.com/articles/good-resources-for-learning-git-and-github/) to read.
-
-## Jumping between Chapters
-
-I have organised the repository such that every chapter will have its own corresponding branch in the code. Feel free to jump between the different chapters and test out the code. However, remember to [stash](https://git-scm.com/book/en/v1/Git-Tools-Stashing) or commit your changes before switching to a new branch. Also remember to clear your cache if things are broken.
-
-To clear the cache fully,
-
-```
-app/console cache:clear --no-warmup
-```
-
-Assuming we are in the dev environment, this command is equivalent to 
-
-```
-rm -rf app/cache/dev
-```
-
-## Regenerating Bootstrap Cache
-
-If you are getting errors on /var/www/songbird/app/bootstrap.php.cache, you can regenerate it.
-
-```
--> ./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
-```
-
-## Reinstalling Symfony
-
-Some directories are needed by Symfony but they are not version controlled (the /bin directory for eg). In case they have been deleted accidentally, reinstall the packages. The re-installation will not mess up with your existing code. That's the beauty of being modular.
-
-```
-rm -rf vendor
-composer update
-```
-
-## Exercise
-
-This master branch already contains a fresh symfony installation. You can test it out yourself by starting the built in webserver
-
-```
-app/console server:run
-```
-
-This is just a teaser. Don't worry if this command doesn't work as you might not have setup PHP correctly in your system. Feel free to dig your way through and get it to work. If not, I will be running through the setup later. If everything is working correctly, you can verify that by visiting the url:
-
-```
-http://127.0.0.1:8000
-```
-
-and you should see something like this:
-
-![installation teaser](images/installation_teaser.png)
+This is a short chapter. We discussed the basic skills required to learn a modern day framework like Symfony. You were mentally prepared and being warned about the pros and cons of using a framework.
 
 ## References
 
-* [RAD](https://en.wikipedia.org/wiki/Rapid_application_development)
-* [Agile Software Development](https://en.wikipedia.org/wiki/Agile_software_development)
+* [git](https://git-scm.com/)
+
+* [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)
