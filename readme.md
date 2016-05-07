@@ -42,6 +42,8 @@ Our VM will be running ubuntu 14.04, Apache2 and PHP 5.6.
 
 ```
 # now we are going to bring up the virtual machine. This should take up to 15 to 30 mins depending on your internet connnection. Have a cup of coffee.
+# if you already have an instance of ubuntu 14.04, remember to do a vagrant box update.
+
 -> cd songbird
 -> vagrant up
 
@@ -114,7 +116,11 @@ Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/so
 
 * Try running Symfony's build-in webserver. What command would you use?
 
+* Try running vagrant with config generated from [PuPHPet](https://puphpet.com/).
+
 * Try using [docker](https://www.docker.com/) rather than [vagrant](https://www.vagrantup.com) for development. What are the pros and cons of each method?
+
+* How many ways are there to install Symfony?
 
 ## References
 
