@@ -25,6 +25,8 @@ I hope the list doesn't scare you to get started.
 
 I suggest you to get comfortable with the command line. Many modern day frameworks uses command line to automate tasks. In this book, I'll be using a lot of command line but I suggest you not to memorise them. Always type "app/console" to see the options and then narrow in from there.
 
+For example, your app/console might look like this (doesn't matter if it doesn't at this point):
+
 ```
 -> app/console
 
@@ -134,6 +136,10 @@ Let's get the ball rolling...
 ## Summary
 
 This is a short chapter. We discussed the basic skills required to learn a modern day framework like Symfony. You were mentally prepared and being warned about the pros and cons of using a framework.
+
+Next Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_2)
+
+Previous Chapter: [Introduction: SongBird](https://github.com/bernardpeh/songbird)
 
 ## References
 
