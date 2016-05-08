@@ -4,7 +4,7 @@ So that we speak the same language throughout the book, we need a dev (developme
 
 We will do **actual coding in your host** (main operating system) and let the VM run the web server, sharing the web folder between the 2 machines. Note that 99% of the time, you don't need to touch the VM except to make sure that it is up and running.
 
-Our VM will be running ubuntu 14.04, Apache2 and PHP 5.6.
+Our VM will be running ubuntu 14.04, Apache2 and PHP 7.
 
 ## Objectives
 
@@ -15,7 +15,7 @@ Our VM will be running ubuntu 14.04, Apache2 and PHP 5.6.
 
 ## Installation
 
-* In your host machine, make sure you have [php 5.6](http://php.net/manual/en/install.php) and timezone configured, [vagrant](https://www.vagrantup.com/downloads.html), [virtualbox](https://www.virtualbox.org/wiki/Downloads) and [git](https://git-scm.com) **installed**. 
+* In your host machine, make sure you have php say [php 5.6](http://php.net/manual/en/install.php) and timezone configured, [vagrant](https://www.vagrantup.com/downloads.html), [virtualbox](https://www.virtualbox.org/wiki/Downloads), [composer](https://getcomposer.org/doc/00-intro.md) and [git](https://git-scm.com) **installed**.
 
 * Mac users can install php 5.6 using
 
@@ -41,7 +41,7 @@ Our VM will be running ubuntu 14.04, Apache2 and PHP 5.6.
 * run vagrant
 
 ```
-# now we are going to bring up the virtual machine. This should take up to 15 to 30 mins depending on your internet connnection. Have a cup of coffee.
+# now we are going to bring up the virtual machine. This should take about 30 mins depending on your internet connnection. Have a cup of coffee.
 # if you already have an instance of ubuntu 14.04, remember to do a vagrant box update.
 
 -> cd songbird
@@ -59,14 +59,13 @@ Bringing machine 'default' up with 'virtualbox' provider...
 ...
 ```
 
-* If there were some modules that were not installed, reprovision it
+* If there were some modules that were not installed due to connection timed out, reprovision it
 
 ```
 vagrant reload --provision
 ```
 
-
-* Once everything is successful, we can now update the config for the app:
+* You can now install all the libraries:
 
 ```
 -> cd www/songbird
@@ -78,11 +77,10 @@ vagrant reload --provision
 # database_user: songbird
 # database_password: songbird
 ...
-# mailer_host: 127.0.0.1:1025
+# We are using smtp port 8025 to catch all mails.
+# mailer_host: 127.0.0.1:8025
 ...
 ```
-
-We are using smtp port 1025 to catch all mails.
 
 * add IP of your VM on your [host file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
 
@@ -90,23 +88,21 @@ We are using smtp port 1025 to catch all mails.
 192.168.56.111 songbird.dev  www.songbird.dev
 ```
 
-* Open up browser and go to http://songbird.dev/app/example. If you see the word "homepage", your installation is successful.
+* Open up browser and go to https://songbird.dev/. Add the exception in the browser since the vm self-signed the ssl certificate. If you see an installation successful page, you are on the right track.
 
-* Now try this url http://songbird.dev/app_dev.php/app/example and you should see the same "homepage" text but with a little icon/toolbar at the bottom of the page. That's right, you are now in dev mode.
+* Now try this url https://songbird.dev/app_dev.php and you should see the same successful page but with a little icon/toolbar at the bottom of the page. That's right, you are now in dev mode.
 
-Why the "app_dev.php"? That is like the default index page for the dev environment. All url rewrite goes to this page and this is something unique to Symfony.  
+Why the "app_dev.php"? That is like the default page for the dev environment. All url rewrite goes to this page and this is something unique to Symfony.
 
-A bit of command line teaser...
+You can also check if all installation requirements are met by going to
 
 ```
--> vagrant ssh -c "wget http://songbird.dev/config.php; cat config.php; rm config.php"
+https://songbird.dev/config.php
 ```
-
-We shelled into the VM and look at the raw html of http://songbird.dev/config.php. If you see "Your configuration looks good to run Symfony.", you can be sure that the VM is setup correctly.
 
 ## Summary
 
-In this chapter, we setup the development environment from a ready made instance of virtualbox. We installed Symfony and configured the host file to access SongBird from the host machine.
+In this chapter, we setup the development environment from a ready made instance of virtualbox. We installed Symfony and configured the host to access SongBird from the host machine.
 
 Next Chapter: [iChapter 4: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_4)
 
