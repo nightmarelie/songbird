@@ -104,7 +104,7 @@ https://songbird.dev/config.php
 
 In this chapter, we setup the development environment from a ready made instance of virtualbox. We installed Symfony and configured the host to access SongBird from the host machine.
 
-Next Chapter: [iChapter 4: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_4)
+Next Chapter: [Chapter 4: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_4)
 
 Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_2)
 
