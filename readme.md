@@ -122,4 +122,10 @@ Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/so
 
 * [Symfony Installation](https://symfony.com/doc/current/book/installation.html)
 
+## Donation
 
+Donation welcomed.
+
+Bitcoin: 12fUDgzwji44GgoTxyrLWgGvHvzecv3JSL
+
+Ether: 0xcb975754208e8229aab467b36a97c0e9bdf491c7
