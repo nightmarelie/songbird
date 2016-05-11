@@ -213,10 +213,3 @@ Next Chapter: [Chapter 5: The Testing Framework Part 2](https://github.com/berna
 
 Previous Chapter: [Chapter 3: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_3)
 
-## Donation
-
-Donation welcomed.
-
-Bitcoin: 12fUDgzwji44GgoTxyrLWgGvHvzecv3JSL
-
-Ether: 0xcb975754208e8229aab467b36a97c0e9bdf491c7
