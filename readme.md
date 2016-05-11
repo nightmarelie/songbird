@@ -68,7 +68,7 @@ modules:
 
 As we will be using SonataAdmin mostly, it makes sense to use Behavioural (Acceptance) Testing rather than Unit Testing. Acceptance Testing is like Black Box Testing - We try to simulate real users interacting with our app. We ignore the inner workings of the code and only care if it works from the end user's point of view.
 
-Here, we are using [selenium](http://seleniumhq.org) webdriver to simulate browser testing. Codeception by default comes with PhpBrowser which doesn't support javascript. Selenium is slow but is the industrial standard in terms of acceptance testing. We could also use a headless browser like [phantomjs](http://phantomjs.org) which is faster but I found it buggy at the time of writing. In this book, I will be using selenium.
+Here, we are using [selenium](http://seleniumhq.org) webdriver to simulate browser testing ([firefox](https://www.mozilla.org/en-US/firefox/new/)). Codeception by default comes with PhpBrowser which doesn't support javascript. Selenium is slow but is the industrial standard in terms of acceptance testing. We could also use a headless browser like [phantomjs](http://phantomjs.org) which is faster but I found it buggy at the time of writing. In this book, I will be using selenium.
 
 We can now generate the acceptance actions:
 
@@ -209,7 +209,7 @@ In this chapter, we discussed the importance of testing and touched on TDD and B
 
 ## Summary
 
-Next Chapter: [Chapter 5: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_5)
+Next Chapter: [Chapter 5: The Testing Framework Part 2](https://github.com/bernardpeh/songbird/tree/chapter_5)
 
 Previous Chapter: [Chapter 3: What is SongBird](https://github.com/bernardpeh/songbird/tree/chapter_3)
 
