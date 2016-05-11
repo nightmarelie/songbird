@@ -100,10 +100,3 @@ Previous Chapter: [Chapter 1: Survival Skills](https://github.com/bernardpeh/son
 
 * [Functional Specification](https://en.wikipedia.org/wiki/Functional_specification)
 
-## Donation
-
-Donation welcomed.
-
-Bitcoin: 12fUDgzwji44GgoTxyrLWgGvHvzecv3JSL
-
-Ether: 0xcb975754208e8229aab467b36a97c0e9bdf491c7
