@@ -147,10 +147,3 @@ Previous Chapter: [Introduction: SongBird](https://github.com/bernardpeh/songbir
 
 * [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)
 
-## Donation
-
-Donation welcomed.
-
-Bitcoin: 12fUDgzwji44GgoTxyrLWgGvHvzecv3JSL
-
-Ether: 0xcb975754208e8229aab467b36a97c0e9bdf491c7
