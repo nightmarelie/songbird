@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar scripts/selenium-server-standalone-2.53.0.jar -Dwebdriver.firefox.profile=default
