@@ -86,6 +86,9 @@ Next we need to configure FOSUserBundle. Don't worry if certain directives doesn
 ```
 # app/config/config.yml
 ...
+# turn on translator
+translator:      { fallbacks: ["%locale%"] }
+...
 
 # fosuser config
 fos_user:
