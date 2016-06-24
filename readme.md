@@ -1,17 +1,14 @@
 # Chapter 3: Creating the Dev Environment
 
-So that we speak the same language throughout the book, we need a dev (development) environment that it is consistent in everyone's host. That best way to do that is to create a virtual machine (VM) via [vagrant](https://www.vagrantup.com). This is a popular technique nowadays. Laravel has something similar called [Homestead](https://github.com/laravel/homestead)
+So that we speak the same language throughout the book, we need a dev (development) environment that it is consistent in everyone's host. That best way to do that is to create a virtual machine (VM) via [vagrant](https://www.vagrantup.com). This is a popular technique nowadays and we will be using [Homestead](https://github.com/laravel/homestead) for this purpose.
 
-We will do **actual coding in your host** (main operating system) and let the VM run the web server, sharing the web folder between the 2 machines. Note that 99% of the time, you don't need to touch the VM except to make sure that it is up and running.
-
-Our VM will be running ubuntu 14.04, Apache2 and PHP 7.
+The idea is to do **actual coding in your host** (main operating system) and let the VM run the web server, sharing the web folder between the 2 machines. Note that 99% of the time, you don't need to touch the VM except to make sure that it is up and running.
 
 ## Objectives
 
-> * Install the standard SongBird virtual machine.
+> * Install all pre-requisites for development.
 
 > * Configure your host to access the VM.
-
 
 ## Installation
 
@@ -42,33 +39,19 @@ Our VM will be running ubuntu 14.04, Apache2 and PHP 7.
 
 ```
 # now we are going to bring up the virtual machine. This should take about 30 mins depending on your internet connnection. Have a cup of coffee.
-# if you already have an instance of ubuntu 14.04, remember to do a vagrant box update.
 
 -> cd songbird
+-> composer update
 -> vagrant up
 
-Bringing machine 'default' up with 'virtualbox' provider...
-==> default: Importing base box 'puphpet/ubuntu1404-x64'...
-==> default: Matching MAC address for NAT networking...
-==> default: Checking if box 'puphpet/ubuntu1404-x64' is up to date...
-==> default: A newer version of the box 'puphpet/ubuntu1404-x64' is available! You currently
-==> default: have version '2.0'. The latest is version '20151201'. Run
-==> default: `vagrant box update` to update.
-==> default: Setting the name of the VM: songbird_default_1462590898969_15135
-==> default: Pruning invalid NFS exports. Administrator privileges will be required...
+# you will be prompted to enter admin password for mounting nfs.
 ...
 ```
 
-* If there were some modules that were not installed due to connection timed out, reprovision it
+* You can now install symfony libraries:
 
 ```
-vagrant reload --provision
-```
-
-* You can now install all the libraries:
-
-```
--> cd www/songbird
+-> cd symfony
 -> composer udpate
 
 # when prompted, leave default settings except for the followings:
@@ -82,27 +65,23 @@ vagrant reload --provision
 ...
 ```
 
-* add IP of your VM on your [host file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
+* add IP of your VM to your [host file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
 
 ```
-192.168.56.111 songbird.dev  www.songbird.dev
+192.168.56.111 songbird.app adminer.app
 ```
 
-* Open up browser and go to https://songbird.dev/. Add the exception in the browser since the vm self-signed the ssl certificate. If you see an installation successful page, you are on the right track.
+* Open up browser and go to https://songbird.app/. Add the exception in the browser since the vm self-signed the ssl certificate. If you see an installation successful page, you are on the right track.
 
-* Now try this url https://songbird.dev/app_dev.php and you should see the same successful page but with a little icon/toolbar at the bottom of the page. That's right, you are now in dev mode.
+![Welcome Page](images/welcome_page.png)
 
-Why the "app_dev.php"? That is like the default page for the dev environment. All url rewrite goes to this page and this is something unique to Symfony.
+* Now try this url https://songbird.app/app_dev.php and you should see the same successful page but with a little icon/toolbar at the bottom of the page. That's right, you are now in dev mode. Why the "app_dev.php"? That is like the default page for the dev environment. All url rewrite goes to this page and this is something unique to Symfony.
 
-You can also check if all installation requirements are met by going to
-
-```
-https://songbird.dev/config.php
-```
+* Also try https://adminer.app and you should see the adminer page as well.
 
 ## Summary
 
-In this chapter, we setup the development environment from a ready made instance of virtualbox. We installed Symfony and configured the host to access SongBird from the host machine.
+In this chapter, we setup the development environment from a ready made instance of virtualbox (Homestead). We installed Symfony and configured the host to access SongBird from the host machine.
 
 Next Chapter: [Chapter 4: The Testing Framework Part 1](https://github.com/bernardpeh/songbird/tree/chapter_4)
 
@@ -112,8 +91,6 @@ Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/so
 
 * Try running Symfony's build-in webserver. What command would you use?
 
-* Try running vagrant with config generated from [PuPHPet](https://puphpet.com/).
-
 * Try using [docker](https://www.docker.com/) rather than [vagrant](https://www.vagrantup.com) for development. What are the pros and cons of each method?
 
 * How many ways are there to install Symfony?
@@ -121,4 +98,6 @@ Previous Chapter: [Chapter 2: What is SongBird](https://github.com/bernardpeh/so
 ## References
 
 * [Symfony Installation](https://symfony.com/doc/current/book/installation.html)
+
+* [Homestead with Symfony](http://symfony.com/doc/current/cookbook/workflow/homestead.html)
 

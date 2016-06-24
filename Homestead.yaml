@@ -1,0 +1,45 @@
+---
+ip: "192.168.56.111"
+memory: 1024
+cpus: 1
+hostname: songbird
+name: songbird
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "songbird/symfony"
+      to: "/home/vagrant/symfony"
+      type: "nfs"
+
+    - map: "songbird/adminer"
+      to: "/home/vagrant/adminer"
+      type: "nfs"
+
+sites:
+    - map: songbird.app
+      to: "/home/vagrant/symfony/web"
+      type: symfony
+
+    - map: adminer.app
+      to: "/home/vagrant/adminer"
+
+databases:
+    - songbird
+
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp

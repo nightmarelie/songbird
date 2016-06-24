@@ -1,29 +1,28 @@
-# -*- mode: ruby -*-
-
-dir = File.dirname(File.expand_path(__FILE__))
-
+require 'json'
 require 'yaml'
-require "#{dir}/puphpet/ruby/deep_merge.rb"
-require "#{dir}/puphpet/ruby/to_bool.rb"
-require "#{dir}/puphpet/ruby/puppet.rb"
 
-configValues = YAML.load_file("#{dir}/puphpet/config.yaml")
+VAGRANTFILE_API_VERSION ||= "2"
+confDir = $confDir ||= File.expand_path("vendor/laravel/homestead", File.dirname(__FILE__))
 
-provider = ENV['VAGRANT_DEFAULT_PROVIDER'] ? ENV['VAGRANT_DEFAULT_PROVIDER'] : 'local'
-if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
-  custom = YAML.load_file("#{dir}/puphpet/config-#{provider}.yaml")
-  configValues.deep_merge!(custom)
-end
+homesteadYamlPath = "Homestead.yaml"
+homesteadJsonPath = "Homestead.json"
+afterScriptPath = "after.sh"
+aliasesPath = "aliases"
 
-if File.file?("#{dir}/puphpet/config-custom.yaml")
-  custom = YAML.load_file("#{dir}/puphpet/config-custom.yaml")
-  configValues.deep_merge!(custom)
-end
+require File.expand_path(confDir + '/scripts/homestead.rb')
 
-data = configValues['vagrantfile']
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    if File.exists? aliasesPath then
+        config.vm.provision "file", source: aliasesPath, destination: "~/.bash_aliases"
+    end
 
-Vagrant.require_version '>= 1.8.1'
+    if File.exists? homesteadYamlPath then
+        Homestead.configure(config, YAML::load(File.read(homesteadYamlPath)))
+    elsif File.exists? homesteadJsonPath then
+        Homestead.configure(config, JSON.parse(File.read(homesteadJsonPath)))
+    end
 
-Vagrant.configure('2') do |config|
-  eval File.read("#{dir}/puphpet/vagrant/Vagrantfile-#{data['target']}")
+    if File.exists? afterScriptPath then
+        config.vm.provision "shell", path: afterScriptPath
+    end
 end

@@ -1,5 +1,4 @@
 /.vagrant/
 .idea/
-/puphpet/files/dot/ssh
 .DS_Store
-composer.lock
+/vendor/
